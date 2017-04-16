@@ -7,21 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "users")
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "users_id_seq")
+	@SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq")
 	private Long id;
 	
 	@NotNull
 	@Column(length=100)
 	private String name;
 	
+	@NotNull
 	private Integer age;
 	
+	@NotNull
 	private BigDecimal salary;
 
 	public Long getId() {
