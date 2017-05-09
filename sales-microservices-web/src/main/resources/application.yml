@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: sales-web
+
+server:
+  port: 8082
+
+eureka:
+  password: password
+  client:
+    serviceUrl:
+      defaultZone: http://user:${eureka.password}@localhost:8761/eureka/
+  instance:
+    #leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+      
+  security:
+    basic:
+      enabled: false
+    oauth2:
+      access-token-uri: http://localhost:8081/oauth/token
+      user-authorization-uri: http://localhost:8081/oauth/authorize
+      client-id: alfa
+      client-secret: alfa
+      scope: read
+      
+  endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+    
+logging.level:
+  
+  # Enable request logging
+  org.springframework.web.filter: DEBUG
+  
+  # Enable logging of access token request
+  org.apache.http.headers: DEBUG
+  org.springframework.web.client: DEBUG
+  
+  logging.level.org.springframework.security: DEBUG
