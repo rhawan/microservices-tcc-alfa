@@ -9,12 +9,16 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.alfa.sales.config.SalesWebClientConfiguration;
@@ -32,6 +36,9 @@ public class SalesMicroservicesWebApplication {
 	private HelloClient client;
 	
 	@Autowired
+	private ResourceCliente resourceCliente;
+	
+	@Autowired
 	private OAuth2ClientContext oAuth2ClientContext;
 
 	public static void main(String[] args) {
@@ -40,13 +47,28 @@ public class SalesMicroservicesWebApplication {
 	
 	@RequestMapping("/")
 	public String hello() {
-		return client.hello();
+		//return client.hello();
+		return resourceCliente.getCliente(999);
 	}
 	
 	@FeignClient(name = "resource-cliente", configuration = SalesWebClientConfiguration.class)
 	interface HelloClient {
 		@RequestMapping(value = "/", method = GET)
 		String hello();
+	}
+	
+	@FeignClient(name = "resource-cliente")
+	interface ResourceCliente {
+		
+		@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET)
+		String getCliente(long id);
+		
+		@RequestMapping(value = "/cliente", method = RequestMethod.POST)
+		String listarClientes();
+		
+		@RequestMapping(value = "/cliente", method = RequestMethod.PUT)
+		String salvarCliente();
+		
 	}
 	
 	@Bean
