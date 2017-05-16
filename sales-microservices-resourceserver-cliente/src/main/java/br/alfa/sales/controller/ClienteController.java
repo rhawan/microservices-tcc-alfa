@@ -1,68 +1,72 @@
 package br.alfa.sales.controller;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import br.alfa.sales.model.Cliente;
+import br.alfa.sales.service.ClienteService;
+import br.alfa.sales.util.CustomErrorType;
 
 @RestController
 public class ClienteController {
 	
-	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET)
-	public ResponseEntity<String> getCliente(@PathVariable("id") long id) {
-		System.out.println("Consultando cliente com id " + id);
-		return new ResponseEntity<String>("/cliente GET id = " + id, HttpStatus.OK);
-	}
+	public static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 	
-	@RequestMapping(value = "/cliente", method = RequestMethod.POST)
-	public ResponseEntity<String> listarClientes() {
-		System.out.println("Listando clientes ");
-		return new ResponseEntity<String>("/cliente POST", HttpStatus.OK);
-	}
+	@Autowired
+	private ClienteService clienteService;
 	
-	@RequestMapping(value = "/cliente", method = RequestMethod.PUT)
-	public ResponseEntity<String> salvarCliente() {
-		System.out.println("Inserindo cliente ");
-		return new ResponseEntity<String>("/cliente PUT", HttpStatus.OK);
-	}
-	
-	
-	
-	
-	
-	//-------------------Retrieve Single User--------------------------------------------------------
-    
-    /*@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
-        System.out.println("Fetching User with id " + id);
-        User user = userService.findById(id);
-        if (user == null) {
-            System.out.println("User with id " + id + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/cliente/", method = RequestMethod.GET)
+    public ResponseEntity<List<Cliente>> listarClientes() {
+    	logger.info("Listando todos clientes");
+        List<Cliente> clientes = clienteService.listar();
+        if (clientes.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
     }
  
-     
-     
-    //-------------------Create a User--------------------------------------------------------
-     
-    @RequestMapping(value = "/user/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating User " + user.getName());
- 
-        if (userService.isUserExist(user)) {
-            System.out.println("A User with name " + user.getName() + " already exist");
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Cliente> getCliente(@PathVariable("id") Long id) {
+    	logger.info("Consultando usuario com id " + id);
+        Cliente cliente = clienteService.consultar(id);
+        if (cliente == null) {
+            return new ResponseEntity(new CustomErrorType("Cliente com id " + id 
+                    + " nao encontrado"), HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+    }
  
-        userService.saveUser(user);
+    @RequestMapping(value = "/cliente/", method = RequestMethod.POST)
+    public ResponseEntity<String> salvarCliente(@RequestBody Cliente cliente, UriComponentsBuilder ucBuilder) {
+        logger.info("Criando cliente : {}", cliente);
+        
+        clienteService.salvar(cliente);
  
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-    }*/
-
+        headers.setLocation(ucBuilder.path("/cliente/{id}").buildAndExpand(cliente.getId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+ 
+    @RequestMapping(value = "/cliente/", method = RequestMethod.DELETE)
+    public ResponseEntity<Cliente> excluirCliente(@RequestBody Cliente cliente) {
+        logger.info("Excluindo Cliente com id {}", cliente.getId());
+ 
+        clienteService.excluir(cliente);
+        return new ResponseEntity<Cliente>(HttpStatus.NO_CONTENT);
+    }
+ 
 }

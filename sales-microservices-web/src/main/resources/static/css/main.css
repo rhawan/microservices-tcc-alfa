@@ -1,0 +1,47 @@
+.navbar-inverse {
+	padding: 0px;
+	margin: 0px;
+}
+.container {
+	width: 100%;
+	padding: 0px 100px 0px 100px;
+	margin: 0px;
+}
+
+.containerlista {
+	width: 100%;
+	padding: 0 15% 0 15%;
+	margin: 0px;
+}
+
+.containerCadastro {
+	width: 100%;
+	padding: 0 20% 0 20%;
+	margin: 0px;
+	background-color: #DCDCDC;
+}
+
+h1{
+	margin: 0 0 30px 0;
+	padding: 10px;
+	font-size: 23px;
+	font-weight:bold;
+	text-align: center;
+	color:white;
+	background: buttonshadow;
+}
+
+h2{
+	width: 956px;
+	margin: 0 0 30px 0;
+	padding: 5px 0 10px 0;
+	font-size: 23px;
+	color:maroon;
+	font-weight:bold;
+	border-style: dashed;
+	border-width: 0 0 1px 0;
+	border-color: black;
+}
+.containerCliente #tableClient td {
+	width: 200px;
+}

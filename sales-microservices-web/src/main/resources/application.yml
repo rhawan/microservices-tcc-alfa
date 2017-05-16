@@ -6,7 +6,7 @@ server:
   port: 8082
 
 eureka:
-  password: password
+  password: eureka
   client:
     serviceUrl:
       defaultZone: http://user:${eureka.password}@localhost:8761/eureka/

@@ -24,20 +24,24 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 			.antMatchers("/**").authenticated()
-		.and()
-			.httpBasic();
+			.and()
+			.anonymous().disable();
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-			.withUser("reader")
-			.password("reader")
-			.authorities("FOO_READ")
+			.withUser("cliente")
+			.password("cliente")
+			.authorities("ADMIN_CLIENTE")
 			.and()
 			.withUser("writer")
 			.password("writer")
-			.authorities("FOO_READ", "FOO_WRITE");
+			.authorities("FOO_READ", "FOO_WRITE")
+			.and()
+			.withUser("test")
+			.password("test")
+			.authorities("BLA_BLA");
 	}
 	
 	@Override

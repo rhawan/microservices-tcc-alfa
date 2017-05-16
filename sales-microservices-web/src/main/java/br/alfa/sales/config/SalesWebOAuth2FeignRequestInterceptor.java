@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.client.token.AccessTokenProviderChain
 import org.springframework.security.oauth2.client.token.AccessTokenRequest;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider;
-import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.implicit.ImplicitAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
@@ -86,8 +85,8 @@ public class SalesWebOAuth2FeignRequestInterceptor extends OAuth2FeignRequestInt
             details.setAccessTokenUri(accessTokenUri);
             details.setClientId(clientId);
             details.setScope(Arrays.asList(scope));
-            details.setUsername("reader");
-            details.setPassword("reader");
+            details.setUsername("cliente");
+            details.setPassword("cliente");
             return details;
         } else {
             ResourceOwnerPasswordResourceDetails details = new ResourceOwnerPasswordResourceDetails();
@@ -95,10 +94,10 @@ public class SalesWebOAuth2FeignRequestInterceptor extends OAuth2FeignRequestInt
             details.setClientId(clientId);
             //details.setClientSecret(clientSecret);
             details.setScope(Arrays.asList(scope));
-            details.setUsername("reader");
-            details.setPassword("reader");
+            details.setUsername("cliente");
+            details.setPassword("cliente");
             return details;
         }
     }
-
+	
 }

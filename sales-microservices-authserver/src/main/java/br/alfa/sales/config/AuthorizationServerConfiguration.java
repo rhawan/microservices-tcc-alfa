@@ -29,7 +29,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		.withClient("alfa")
 		.scopes("read")
 		.autoApprove(true)
-		.authorities("FOO_READ", "FOO_WRITE")
 		.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit");
 	}
 	
