@@ -9,7 +9,6 @@
 	<packaging>jar</packaging>
 
 	<name>sales-microservices-web</name>
-	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -121,4 +120,5 @@
 		</plugins>
 	</build>
 	
+	<description>Projeto que implementa o frontend da arquitetura e consome os microsserviços de cliente, produto e pedido</description>
 </project>

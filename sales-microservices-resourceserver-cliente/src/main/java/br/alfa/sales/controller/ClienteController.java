@@ -41,7 +41,7 @@ public class ClienteController {
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cliente> getCliente(@PathVariable("id") Long id) {
-    	logger.info("Consultando usuario com id " + id);
+    	logger.info("Consultando cliente com id " + id);
         Cliente cliente = clienteService.consultar(id);
         if (cliente == null) {
             return new ResponseEntity(new CustomErrorType("Cliente com id " + id 

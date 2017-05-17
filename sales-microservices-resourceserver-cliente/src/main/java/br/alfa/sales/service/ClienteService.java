@@ -10,6 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import br.alfa.sales.model.Cliente;
+import br.alfa.sales.model.TipoPessoa;
 import br.alfa.sales.model.UF;
 import br.alfa.sales.repository.ClienteRepository;
 
@@ -34,6 +35,7 @@ public class ClienteService extends AbstractService<Cliente> {
 		cliente1.setEndereco("Rua 10, Praça Universitária, Setor Universitário");
 		cliente1.setCidade("GOIANIA");
 		cliente1.setUF(UF.GO);
+		cliente1.setTipoPessoa(TipoPessoa.FISICA);
 		//cliente1.setDataUltimaCompra(LocalDateTime.now());
 		cliente1.setTelefone("6212345678");
 		
@@ -45,6 +47,7 @@ public class ClienteService extends AbstractService<Cliente> {
 		cliente2.setEndereco("Av 136, Ed Nasa Business Style, Setor Marista");
 		cliente2.setCidade("GOIANIA");
 		cliente2.setUF(UF.GO);
+		cliente2.setTipoPessoa(TipoPessoa.FISICA);
 		//cliente2.setDataUltimaCompra(LocalDateTime.now());
 		cliente2.setTelefone("62987654321");
 		

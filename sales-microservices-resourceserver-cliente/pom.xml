@@ -8,8 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sales-microservices-authserver</name>
-	<description>Demo project for Spring Boot</description>
+	<name>sales-microservices-resourceserver-produto</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -115,4 +114,5 @@
 	</build>
 
 
+	<description>Microservice de clientes</description>
 </project>

@@ -22,5 +22,5 @@ public class ClienteController {
 		model.addAttribute("clientes", clientes);
 		return "pesquisaCliente";
 	}
-
+	
 }

@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SalesMicroservicesAuthserverApplicationTests {
+public class SalesMicroservicesResourceServerClienteApplicationTests {
 
 	@Test
 	public void contextLoads() {

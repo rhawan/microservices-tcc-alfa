@@ -33,7 +33,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication()
 			.withUser("cliente")
 			.password("cliente")
-			.authorities("ADMIN_CLIENTE")
+			.authorities("ADMIN_CLIENTE", "ADMIN_PRODUTO")
 			.and()
 			.withUser("writer")
 			.password("writer")
