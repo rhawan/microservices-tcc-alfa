@@ -30,7 +30,7 @@
 				<thead>
 					<tr>
 						<th class="col-sm-3" data-field="nome">Nome</th>
-						<th class="col-sm-3" data-field="nome">CPF / CNPJ</th>
+						<th class="col-sm-3" data-field="cpfCnpj">CPF / CNPJ</th>
 						<th class="col-sm-2" data-field="tipoPessoa">Tipo Pessoa</th>
 						<th class="col-sm-2" data-field="telefone">Telefone</th>
 						<th class="col-sm-2" data-field="cidade">Cidade</th>
