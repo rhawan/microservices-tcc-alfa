@@ -1,13 +1,13 @@
 package br.alfa.sales.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import org.hibernate.annotations.DynamicUpdate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @DynamicUpdate
@@ -17,6 +17,7 @@ public class Cliente extends Entidade {
 	
 	private String cpfCnpj;
 	
+	@Enumerated(EnumType.STRING)
 	private TipoPessoa tipoPessoa;
 	
 	private String telefone;
@@ -25,6 +26,7 @@ public class Cliente extends Entidade {
 	
 	private String cidade;
 	
+	@Enumerated(EnumType.STRING)
 	private UF UF;
 	
 	private String email;
@@ -32,7 +34,7 @@ public class Cliente extends Entidade {
 	private BigDecimal valorLimiteCredito;
 	
 	//@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	//private LocalDateTime dataUltimaCompra;
+	private LocalDate dataUltimaCompra;
 
 	public String getNome() {
 		return nome;
@@ -106,12 +108,12 @@ public class Cliente extends Entidade {
 		this.valorLimiteCredito = valorLimiteCredito;
 	}
 
-	//public LocalDateTime getDataUltimaCompra() {
-	//	return dataUltimaCompra;
-	//}
+	public LocalDate getDataUltimaCompra() {
+		return dataUltimaCompra;
+	}
 
-	//public void setDataUltimaCompra(LocalDateTime dataUltimaCompra) {
-	//	this.dataUltimaCompra = dataUltimaCompra;
-	//}
-
+	public void setDataUltimaCompra(LocalDate dataUltimaCompra) {
+		this.dataUltimaCompra = dataUltimaCompra;
+	}
+	
 }

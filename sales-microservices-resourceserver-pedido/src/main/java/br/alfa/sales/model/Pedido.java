@@ -1,8 +1,11 @@
 package br.alfa.sales.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -17,6 +20,9 @@ public class Pedido extends Entidade {
 	private BigDecimal valorTotal;
 	
 	private StatusPedido statusPedido;
+	
+	@OneToMany(mappedBy = "pedido", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<ItemPedido> itens;
 
 	public Long getNumero() {
 		return numero;
@@ -48,6 +54,10 @@ public class Pedido extends Entidade {
 
 	public void setStatusPedido(StatusPedido statusPedido) {
 		this.statusPedido = statusPedido;
+	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
 	}
 	
 }

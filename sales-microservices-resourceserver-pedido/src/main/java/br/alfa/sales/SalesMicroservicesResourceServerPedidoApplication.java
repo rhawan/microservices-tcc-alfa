@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class SalesMicroservicesResourceServerProdutoApplication {
+public class SalesMicroservicesResourceServerPedidoApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(SalesMicroservicesResourceServerProdutoApplication.class, args);
+		SpringApplication.run(SalesMicroservicesResourceServerPedidoApplication.class, args);
 	}
 }
