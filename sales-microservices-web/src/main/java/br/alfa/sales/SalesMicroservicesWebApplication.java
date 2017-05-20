@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -16,6 +18,13 @@ public class SalesMicroservicesWebApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SalesMicroservicesWebApplication.class, args);
+	}
+	
+	@Bean(name = "messageSource")
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("validation");
+		return messageSource;
 	}
 	
 	@Bean

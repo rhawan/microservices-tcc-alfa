@@ -23,7 +23,7 @@ public class ClienteVO {
 	
 	private BigDecimal valorLimiteCredito;
 	
-	private LocalDateTime dataUltimaCompra;
+	//private LocalDateTime dataUltimaCompra;
 
 	public String getNome() {
 		return nome;
@@ -97,12 +97,12 @@ public class ClienteVO {
 		this.valorLimiteCredito = valorLimiteCredito;
 	}
 
-	public LocalDateTime getDataUltimaCompra() {
-		return dataUltimaCompra;
-	}
-
-	public void setDataUltimaCompra(LocalDateTime dataUltimaCompra) {
-		this.dataUltimaCompra = dataUltimaCompra;
-	}
+//	public LocalDateTime getDataUltimaCompra() {
+//		return dataUltimaCompra;
+//	}
+//
+//	public void setDataUltimaCompra(LocalDateTime dataUltimaCompra) {
+//		this.dataUltimaCompra = dataUltimaCompra;
+//	}
 
 }
