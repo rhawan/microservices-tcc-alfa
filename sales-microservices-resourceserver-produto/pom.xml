@@ -89,6 +89,11 @@
 		    <artifactId>HikariCP</artifactId>
 		</dependency>
 		
+		<!-- Apache Commons -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
 		
 	</dependencies>
 	
