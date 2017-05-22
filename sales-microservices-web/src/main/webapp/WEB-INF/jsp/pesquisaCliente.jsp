@@ -21,7 +21,7 @@
 		</c:if>
 		<div class="form-group">
 			<button type="button" id="buttonInsert" class="btn btn-success"
-				onclick="location.href='/novocliente'">
+				onclick="location.href='/novoCliente'">
 				<span class="glyphicon glyphicon-plus-sign"></span> Inserir Cliente
 			</button>
 		</div>

@@ -3,22 +3,35 @@ package br.alfa.sales.vo;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ClienteVO {
 	
+	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 	
+	@NotBlank(message = "CPF / CNPJ é obrigatório")
 	private String cpfCnpj;
 	
+	@NotNull(message = "Informe o Tipo Pessoa")
 	private TipoPessoa tipoPessoa;
 	
+	@NotBlank(message = "Telefone é obrigatório")
 	private String telefone;
 	
+	@NotBlank(message = "Endereço é obrigatório")
 	private String endereco;
 	
+	@NotBlank(message = "Cidade é obrigatório")
 	private String cidade;
 	
+	@NotNull(message = "UF é obrigatório")
 	private UF UF;
 	
+	@Email(message = "Email inválido")
 	private String email;
 	
 	private BigDecimal valorLimiteCredito;

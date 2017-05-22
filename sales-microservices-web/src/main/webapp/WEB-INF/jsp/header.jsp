@@ -3,6 +3,8 @@
 <html lang="pt-BR">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	<!-- Access the bootstrap Css like this,
 		Spring boot will handle the resource mapping automcatically -->
@@ -17,7 +19,7 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header" style="font: 8px; color: white; padding: 12px 0 0 0; text-align: center;">
-				Cadastro de Cliente - Faculdades Alfa - Trabalho para Gestão de Configuração e mudança de Software
+				Cadastro de Cliente - Faculdades Alfa - Segurança em Microsserviços
 			</div>
 		</div>
 	</nav>
