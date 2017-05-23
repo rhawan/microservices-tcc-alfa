@@ -11,13 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.alfa.sales.service.ClienteService;
-import br.alfa.sales.validator.ClienteFormValidator;
 import br.alfa.sales.vo.ClienteVO;
 
 @Controller
@@ -28,15 +27,6 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 
-	
-	@Autowired
-	private ClienteFormValidator clienteFormValidator;
-	
-	/*@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(clienteFormValidator);
-	}*/
-	
 	@RequestMapping("/clientes")
 	public String listarClientes(Model model) {
 		List<ClienteVO> clientes = clienteService.listarClientes();
@@ -45,27 +35,26 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/novoCliente")
-	public ModelAndView novoCliente(ClienteVO cliente) {
-		ModelAndView mv = new ModelAndView("cadastroCliente");
-		mv.addObject(cliente);
-		return mv;
+	public String novoCliente(Model model) {
+		model.addAttribute("cliente", new ClienteVO());
+		return "cadastroCliente";
 	}
 	
 	@PostMapping(value="/salvarCliente")
-	public ModelAndView salvarCliente(@Valid ClienteVO cliente, BindingResult result,
+	public String salvarCliente(@ModelAttribute("cliente") @Valid ClienteVO cliente, BindingResult result,
+			Model model,
 			RedirectAttributes redirectAttributes) {
 		logger.info("Salvando cliente: {}", cliente);
 		if(result.hasErrors()) {
-			logger.info("Ocorreu erros durante a insercao do cliente: {}", cliente);
-			return novoCliente(cliente);
+			model.addAttribute("cliente", cliente);
+			return "cadastroCliente";
 		}
 		
 		logger.info("Cliente salvo.", cliente);
 		clienteService.salvarCliente(cliente);
-		ModelAndView mv = new ModelAndView("redirect:/novoCliente");
-		redirectAttributes.addFlashAttribute("mensagem", "Registro salvo com sucesso!");	
+		redirectAttributes.addFlashAttribute("msg", "Registro salvo com sucesso!");	
 		
-		return mv;
+		return "redirect:/novoCliente";
 	}
 	
 }

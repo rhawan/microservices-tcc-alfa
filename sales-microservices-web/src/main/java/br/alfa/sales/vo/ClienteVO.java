@@ -30,7 +30,7 @@ public class ClienteVO {
 	
 	@NotNull(message = "UF é obrigatório")
 	private UF UF;
-	
+
 	@Email(message = "Email inválido")
 	private String email;
 	

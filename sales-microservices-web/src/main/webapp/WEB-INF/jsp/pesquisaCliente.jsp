@@ -6,7 +6,7 @@
 
 	<jsp:include page="header.jsp" />
 
-	<h1>Listagem de Clientes</h1>
+	<h1>Pesquisa de Clientes</h1>
 
 	<div class="containerlista">
 

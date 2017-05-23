@@ -3,4 +3,4 @@ spring:
     name: OAuthServer
 
 server:
-  port: 8081
+  port: 8079

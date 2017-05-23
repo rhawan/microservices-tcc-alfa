@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 public class SalesWebOAuth2FeignRequestInterceptor extends OAuth2FeignRequestInterceptor {
 	
 	//@Value("${security.oauth2.access-token-uri}")
-    private String accessTokenUri = "http://localhost:8081/oauth/token";
+    private String accessTokenUri = "http://localhost:8079/oauth/token";
 
     //@Value("${security.oauth2.client-id}")
     private String clientId = "alfa";
