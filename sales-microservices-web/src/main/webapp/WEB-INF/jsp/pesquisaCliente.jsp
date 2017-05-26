@@ -35,6 +35,8 @@
 						<th class="col-sm-2" data-field="telefone">Telefone</th>
 						<th class="col-sm-2" data-field="cidade">Cidade</th>
 						<th class="col-sm-1" data-field="estado">UF</th>
+						<th class="col-sm-1">Editar</th>
+						<th class="col-sm-1">Excluir</th>
 					</tr>
 				</thead>
 				<c:forEach items="${clientes}" var="cliente">
@@ -45,6 +47,16 @@
 						<td>${cliente.telefone}</td>
 						<td>${cliente.cidade}</td>
 						<td>${cliente.UF}</td>
+						<!-- 
+						<td><a href="editarCliente/${cliente.id}">Edit</a></td>
+						 -->
+						
+						<td><button type="button" class="btn btn-success"
+				onclick="location.href='/editarCliente/${cliente.id}'">
+				<span class="glyphicon glyphicon-plus-sign"></span>
+			</button></td>
+						
+						  
 					</tr>
 				</c:forEach>
 			</table>

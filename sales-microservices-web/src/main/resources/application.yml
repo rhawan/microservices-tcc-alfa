@@ -4,6 +4,12 @@ spring:
 
 server:
   port: 8082
+  
+jsf:
+  PROJECT_STAGE: Development
+  primefaces:
+    theme: bootstrap
+    FONT_AWESOME: true
 
 eureka:
   password: eureka
@@ -36,10 +42,10 @@ eureka:
 logging.level:
   
   # Enable request logging
-  org.springframework.web.filter: DEBUG
+  #org.springframework.web.filter: DEBUG
   
   # Enable logging of access token request
-  org.apache.http.headers: DEBUG
-  org.springframework.web.client: DEBUG
+  #org.apache.http.headers: DEBUG
+  #org.springframework.web.client: DEBUG
   
-  logging.level.org.springframework.security: DEBUG
+  #logging.level.org.springframework.security: DEBUG

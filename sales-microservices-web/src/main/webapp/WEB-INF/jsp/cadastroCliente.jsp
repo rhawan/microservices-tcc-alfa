@@ -44,7 +44,7 @@
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="col-sm-2 control-label">CPF / CNPJ</label>
 						<div class="col-sm-4">
-							<form:input path="cpfCnpj" type="number" class="form-control"
+							<form:input path="cpfCnpj" type="text" class="form-control"
 								id="cpfCnpj" placeholder="CPF / CNPJ" maxlength="14" />
 							<form:errors path="cpfCnpj" class="control-label" />
 						</div>

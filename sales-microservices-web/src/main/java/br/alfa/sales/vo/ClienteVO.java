@@ -1,7 +1,6 @@
 package br.alfa.sales.vo;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,6 +8,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class ClienteVO {
+	
+	private Long id;
 	
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
@@ -29,7 +30,7 @@ public class ClienteVO {
 	private String cidade;
 	
 	@NotNull(message = "UF é obrigatório")
-	private UF UF;
+	private UF uf;
 
 	@Email(message = "Email inválido")
 	private String email;
@@ -40,6 +41,14 @@ public class ClienteVO {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setNome(String nome) {
@@ -85,13 +94,13 @@ public class ClienteVO {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
-	public UF getUF() {
-		return UF;
+	
+	public UF getUf() {
+		return uf;
 	}
 
-	public void setUF(UF uF) {
-		UF = uF;
+	public void setUf(UF uf) {
+		this.uf = uf;
 	}
 
 	public String getEmail() {

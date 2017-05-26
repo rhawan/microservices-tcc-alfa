@@ -1,60 +1,67 @@
 package br.alfa.sales.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.alfa.sales.service.ClienteService;
 import br.alfa.sales.vo.ClienteVO;
+import br.alfa.sales.vo.UF;
 
-@Controller
-public class ClienteController {
+@ManagedBean
+@ViewScoped
+public class ClienteController implements Serializable {
 	
-	private final Logger logger = LoggerFactory.getLogger(ClienteController.class);
+	private static final long serialVersionUID = 2558775246523510470L;
+
+	private List<ClienteVO> clientes;
 	
-	@Autowired
+	private ClienteVO clienteEdicao;
+	
+	@ManagedProperty("#{clienteService}")
 	private ClienteService clienteService;
+	
+	@PostConstruct
+	public void init() {
+		this.clientes = clienteService.listarClientes();
+		this.clienteEdicao = new ClienteVO();
+	}
+	
+	public String novoCliente() {
+		return "cadastroCliente?faces-redirect=true";
+	}
+	
+	public void salvar() {
+		clienteService.salvarCliente(clienteEdicao);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente salvo com sucesso!"));
+	}
+	
+	public UF[] getEstados() {
+		return UF.values();
+	}
+	
+	public List<ClienteVO> getClientes() {
+		return clientes;
+	}
 
-	@RequestMapping("/clientes")
-	public String listarClientes(Model model) {
-		List<ClienteVO> clientes = clienteService.listarClientes();
-		model.addAttribute("clientes", clientes);
-		return "pesquisaCliente";
+	public void setClienteService(ClienteService clienteService) {
+		this.clienteService = clienteService;
+	}
+
+	public ClienteVO getClienteEdicao() {
+		return clienteEdicao;
+	}
+
+	public void setClienteEdicao(ClienteVO clienteEdicao) {
+		this.clienteEdicao = clienteEdicao;
 	}
 	
-	@GetMapping("/novoCliente")
-	public String novoCliente(Model model) {
-		model.addAttribute("cliente", new ClienteVO());
-		return "cadastroCliente";
-	}
 	
-	@PostMapping(value="/salvarCliente")
-	public String salvarCliente(@ModelAttribute("cliente") @Valid ClienteVO cliente, BindingResult result,
-			Model model,
-			RedirectAttributes redirectAttributes) {
-		logger.info("Salvando cliente: {}", cliente);
-		if(result.hasErrors()) {
-			model.addAttribute("cliente", cliente);
-			return "cadastroCliente";
-		}
-		
-		logger.info("Cliente salvo.", cliente);
-		clienteService.salvarCliente(cliente);
-		redirectAttributes.addFlashAttribute("msg", "Registro salvo com sucesso!");	
-		
-		return "redirect:/novoCliente";
-	}
-	
+
 }
