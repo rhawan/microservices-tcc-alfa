@@ -27,30 +27,46 @@
 				<p:tabView style="margin-top: 20px" id="tabView">
 					<p:tab title="Dados básicos">
 						<p:panelGrid columns="4" layout="grid"
-								columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
-								styleClass="panelgrid-noborder">
+							columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
+							styleClass="panelgrid-noborder">
 							<p:outputLabel value="Nome" for="nome" />
 							<p:inputText id="nome" required="true"
 								value="#{clienteController.clienteEdicao.nome}" />
+								
+							<p:outputLabel value="Tipo Pessoa" for="tipoPessoa" />
+							<p:selectOneRadio id="tipoPessoa" value="#{clienteController.clienteEdicao.tipoPessoa}"
+								required="true">
+								<f:selectItems value="#{clienteController.tiposPessoa}"
+									var="tipoPessoa" itemLabel="#{tipoPessoa}" itemValue="#{tipoPessoa}" />
+								<p:ajax process="@this" update="@form" />
+							</p:selectOneRadio>
 							
-							<p:outputLabel value="CPF / CNPJ" for="cpfCnpj" />
-							<p:inputText id="cpfCnpj" required="true" type="number"
-								style="width: 70%" value="#{clienteController.clienteEdicao.cpfCnpj}" />
-							
+							<p:outputLabel value="CPF" for="cpf" rendered="#{clienteController.clienteEdicao.tipoPessoa == 'FISICA'}" />
+							<p:inputMask id="cpf"
+								style="width: 70%" value="#{clienteController.clienteEdicao.cpfCnpj}"
+								rendered="#{clienteController.clienteEdicao.tipoPessoa == 'FISICA'}"
+								mask="999.999.999-99" />
+								
+							<p:outputLabel value="CNPJ" for="cnpj" rendered="#{clienteController.clienteEdicao.tipoPessoa == 'JURIDICA'}" />
+							<p:inputMask id="cnpj"
+								style="width: 70%" value="#{clienteController.clienteEdicao.cpfCnpj}"
+								rendered="#{clienteController.clienteEdicao.tipoPessoa == 'JURIDICA'}"
+								mask="99.999.999/9999-99" />
+								
 							<p:outputLabel value="Telefone" for="telefone" />
 							<p:inputText id="telefone" required="true"
 								value="#{clienteController.clienteEdicao.telefone}" />
 							
 							<p:outputLabel value="E-mail" for="email" />
-							<p:inputText id="email" required="true"
+							<p:inputText id="email"
 								value="#{clienteController.clienteEdicao.email}" />
 						</p:panelGrid>
 					</p:tab>
 							
-					<p:tab title="Endereços">
+					<p:tab title="Endereço">
 						<p:panelGrid columns="4" layout="grid"
-								columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
-								styleClass="panelgrid-noborder">
+							columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
+							styleClass="panelgrid-noborder">
 							<p:outputLabel value="Endereço" for="endereco" />
 							<p:inputText id="endereco" required="true"
 								value="#{clienteController.clienteEdicao.endereco}" />
@@ -69,7 +85,14 @@
 						</p:panelGrid>
 					</p:tab>
 					
-					<p:tab title="Observações">
+					<p:tab title="Financeiro">
+						<p:panelGrid columns="4" layout="grid"
+							columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
+							styleClass="panelgrid-noborder">
+							<p:outputLabel value="Valor Limite Crédito" for="valorLimiteCredito" />
+							<p:inputNumber id="valorLimiteCredito" value="#{clienteController.clienteEdicao.valorLimiteCredito}" />
+							
+						</p:panelGrid>
 					</p:tab>
 				</p:tabView>
 			</div>

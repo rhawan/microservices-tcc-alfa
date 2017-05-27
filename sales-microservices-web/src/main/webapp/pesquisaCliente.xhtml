@@ -16,8 +16,10 @@
 							process="@this" />
 					</p:toolbarGroup>
 				</p:toolbar>
+				
+				<p:growl autoUpdate="false" />
 			
-				<p:dataTable value="#{clienteController.clientes}" var="cliente"
+				<p:dataTable id="dtClientes" value="#{clienteController.clientes}" var="cliente"
 						selectionMode="single" selection="#{clienteController.clienteEdicao}"
 						rowKey="#{cliente.id}" style="margin-top: 20px" reflow="true"
 						rows="10" paginator="true"
@@ -47,12 +49,27 @@
 						<h:outputText value="#{cliente.uf}"/>
 					</p:column>
 					<f:facet name="footer">
-						<p:commandButton icon="ui-icon-pencil" value="Editar" action="cadastroCliente?faces-redirect=true" />
+						<p:commandButton icon="ui-icon-pencil" value="Editar" action="cadastroCliente?faces-redirect=true"
+							rendered="#{clienteController.clienteEdicao.id != null}" update="dtClientes" />
+						<p:commandButton icon="fa fa-remove" value="Excluir"
+							actionListener="#{clienteController.excluirCliente}"
+							rendered="#{clienteController.clienteEdicao.id != null}"
+							update="dtClientes" >
+							<p:confirm header="Confirmação" message="Deseja excluir este cliente?" icon="ui-icon-alert" />
+						</p:commandButton>
 					</f:facet>
+					
+					<p:ajax event="rowSelect" update="dtClientes" />
 				</p:dataTable>
-			
-			
-			</h:form>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+		</h:form>
 		</ui:define>
 		
 </ui:composition>
