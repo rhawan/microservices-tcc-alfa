@@ -21,16 +21,6 @@ eureka:
     metadataMap:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
       
-  security:
-    basic:
-      enabled: false
-    oauth2:
-      access-token-uri: http://localhost:8081/oauth/token
-      user-authorization-uri: http://localhost:8081/oauth/authorize
-      client-id: alfa
-      client-secret: alfa
-      scope: read
-      
   endpoints:
   restart:
     enabled: true
@@ -42,10 +32,10 @@ eureka:
 logging.level:
   
   # Enable request logging
-  #org.springframework.web.filter: DEBUG
+  org.springframework.web.filter: DEBUG
   
   # Enable logging of access token request
-  #org.apache.http.headers: DEBUG
-  #org.springframework.web.client: DEBUG
+  org.apache.http.headers: DEBUG
+  org.springframework.web.client: DEBUG
   
-  #logging.level.org.springframework.security: DEBUG
+  logging.level.org.springframework.security: DEBUG

@@ -37,7 +37,6 @@ public class ClienteVO {
 	
 	private BigDecimal valorLimiteCredito;
 	
-	//private LocalDateTime dataUltimaCompra;
 
 	public String getNome() {
 		return nome;
@@ -118,13 +117,5 @@ public class ClienteVO {
 	public void setValorLimiteCredito(BigDecimal valorLimiteCredito) {
 		this.valorLimiteCredito = valorLimiteCredito;
 	}
-
-//	public LocalDateTime getDataUltimaCompra() {
-//		return dataUltimaCompra;
-//	}
-//
-//	public void setDataUltimaCompra(LocalDateTime dataUltimaCompra) {
-//		this.dataUltimaCompra = dataUltimaCompra;
-//	}
 
 }

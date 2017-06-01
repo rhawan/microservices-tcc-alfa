@@ -11,13 +11,17 @@
 			<h:form id="form">
 			
 				<p:toolbar>
+					<p:toolbarGroup align="left">
+						<p:commandButton value="Atualizar" action="#{produtoController.pesquisarProdutos}"
+							update="dtProdutos" />
+					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
 						<p:commandButton value="Novo produto" action="#{produtoController.novoProduto}"
 							process="@this" />
 					</p:toolbarGroup>
 				</p:toolbar>
 				
-				<p:growl autoUpdate="false" />
+				<p:growl autoUpdate="true" />
 			
 				<p:dataTable id="dtProdutos" value="#{produtoController.produtos}" var="produto"
 						selectionMode="single" selection="#{produtoController.produtoEdicao}"
@@ -34,7 +38,7 @@
 						<h:outputText value="#{produto.descricao}"/>
 					</p:column>
 					<p:column headerText="Valor Unitário" priority="2" colspan="1">
-						<h:outputText value="#{produto.valorUnitario}"/>
+						<h:outputText value="R$ #{produto.valorUnitario}"/>
 					</p:column>
 					<p:column headerText="Qtd Estoque" priority="2" colspan="1">
 						<h:outputText value="#{produto.quantidadeEstoque}"/>

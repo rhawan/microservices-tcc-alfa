@@ -40,18 +40,33 @@ public class ClienteController implements Serializable {
 	}
 	
 	public void salvar() {
-		clienteService.salvarCliente(clienteEdicao);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente salvo com sucesso!"));
+		try {
+			clienteService.salvarCliente(clienteEdicao);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente salvo com sucesso!"));
+			this.limparTela();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao salvar cliente!\n" + e.getMessage(), null));
+		}
 	}
 	
 	public void excluirCliente() {
-		clienteService.excluirCliente(clienteEdicao);
-		pesquisarClientes();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente excluído com sucesso!"));
+		try {
+			clienteService.excluirCliente(clienteEdicao);
+			pesquisarClientes();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente excluído com sucesso!"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excluir cliente!\n" + e.getMessage(), null));
+		}
 	}
 	
-	private void pesquisarClientes() {
+	public void pesquisarClientes() {
 		this.clientes = clienteService.listarClientes();
+	}
+	
+	private void limparTela() {
+		this.clienteEdicao = new ClienteVO();
 	}
 	
 	public UF[] getEstados() {

@@ -11,8 +11,7 @@ public class SalesWebClientConfiguration {
 	
 	@Bean
 	public RequestInterceptor oauth2FeignRequestInterceptor(OAuth2ClientContext oAuth2ClientContext) {
-		return new SalesWebOAuth2FeignRequestInterceptor(oAuth2ClientContext);
-		//return new FeignOAuthInterceptor(oAuth2ClientContext);
+		return new FeignOAuthInterceptor(oAuth2ClientContext);
 	}
 
 }

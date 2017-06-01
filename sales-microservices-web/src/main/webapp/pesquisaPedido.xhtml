@@ -26,20 +26,17 @@
 						rowsPerPageTemplate="5,10,15"
 						currentPageReportTemplate="{currentPage} de {totalPages}"
 						paginatorPosition="bottom">
-					<p:column headerText="Código" priority="1" colspan="1">
-						<h:outputText value="#{pedido.codigo}"/>
+					<p:column headerText="Número" priority="1" colspan="1">
+						<h:outputText value="#{pedido.numero}"/>
 					</p:column>
-					<p:column headerText="Descrição" priority="1" colspan="3">
-						<h:outputText value="#{pedido.descricao}"/>
+					<p:column headerText="Cliente" priority="1" colspan="3">
+						<h:outputText value="#{pedido.cliente.cpfCnpj} - #{pedido.cliente.nome}"/>
 					</p:column>
-					<p:column headerText="Valor Unitário" priority="2" colspan="1">
-						<h:outputText value="#{pedido.valorUnitario}"/>
+					<p:column headerText="Valor Total" priority="2" colspan="1">
+						<h:outputText value="R$ #{pedido.valorTotal}"/>
 					</p:column>
-					<p:column headerText="Qtd Estoque" priority="2" colspan="1">
-						<h:outputText value="#{pedido.quantidadeEstoque}"/>
-					</p:column>
-					<p:column headerText="Categoria" priority="3" colspan="2">
-						<h:outputText value="#{pedido.categoria}"/>
+					<p:column headerText="Status Pedido" priority="2" colspan="1">
+						<h:outputText value="#{pedido.statusPedido}"/>
 					</p:column>
 					
 				</p:dataTable>

@@ -4,19 +4,29 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PedidoVO {
+public class PedidoVOTela {
 	
 	private Long numero;
 	
-	private Long clienteId;
+	private ClienteVO cliente;
 	
 	private BigDecimal valorTotal;
 	
 	private StatusPedido statusPedido;
 	
-	private List<ItemPedidoVO> itens;
+	private List<ItemPedidoVOTela> itens;
 	
-	public void addItem(ItemPedidoVO item) {
+	public void addItem(ProdutoVO produto) {
+		if(this.itens == null) {
+			this.itens = new ArrayList<>();
+		}
+		ItemPedidoVOTela item = new ItemPedidoVOTela();
+		item.setProduto(produto);
+		item.setValorUnitario(produto.getValorUnitario());
+		this.itens.add(item);
+	}
+	
+	public void addItemTela(ItemPedidoVOTela item) {
 		if(this.itens == null) {
 			this.itens = new ArrayList<>();
 		}
@@ -30,13 +40,13 @@ public class PedidoVO {
 	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
-
-	public Long getClienteId() {
-		return clienteId;
+	
+	public ClienteVO getCliente() {
+		return cliente;
 	}
 
-	public void setClienteId(Long clienteId) {
-		this.clienteId = clienteId;
+	public void setCliente(ClienteVO cliente) {
+		this.cliente = cliente;
 	}
 
 	public BigDecimal getValorTotal() {
@@ -55,7 +65,7 @@ public class PedidoVO {
 		this.statusPedido = statusPedido;
 	}
 
-	public List<ItemPedidoVO> getItens() {
+	public List<ItemPedidoVOTela> getItens() {
 		return itens;
 	}
 	

@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -19,9 +22,11 @@ public class Pedido extends Entidade {
 	
 	private BigDecimal valorTotal;
 	
+	@Enumerated(EnumType.STRING)
 	private StatusPedido statusPedido;
 	
-	@OneToMany(mappedBy = "pedido", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "pedido_id")
 	private List<ItemPedido> itens;
 
 	public Long getNumero() {

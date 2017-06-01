@@ -21,7 +21,7 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 			
-			<p:growl autoUpdate="false" />
+			<p:growl autoUpdate="true" />
 			
 			<div class="ui-fluid">
 				<p:tabView style="margin-top: 20px" id="tabView">
@@ -29,27 +29,56 @@
 						<p:panelGrid columns="4" layout="grid"
 							columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4"
 							styleClass="panelgrid-noborder">
-							<p:outputLabel value="Código" for="codigo" />
-							<p:inputText id="codigo" required="true"
-								value="#{pedidoController.pedidoEdicao.codigo}" />
-								
-							<p:outputLabel value="Descrição" for="descricao" />
-							<p:inputText id="descricao" required="true"
-								value="#{pedidoController.pedidoEdicao.descricao}" />
 							
-							<p:outputLabel value="Valor Unitário" for="valorUnitario" />
-							<p:inputNumber id="valorUnitario"
-								value="#{pedidoController.pedidoEdicao.valorUnitario}" />
-								
-							<p:outputLabel value="Qtd Estoque" for="qtdEstoque" />
-							<p:inputNumber id="qtdEstoque"
-								value="#{pedidoController.pedidoEdicao.quantidadeEstoque}" />
-								
-							<p:outputLabel value="Categoria" for="categoria" />
-							<p:inputText id="categoria" required="true"
-								value="#{pedidoController.pedidoEdicao.categoria}" />
+							<p:outputLabel value="Cliente" for="cliente" />
+							<p:selectOneMenu id="cliente" value="#{pedidoController.pedidoEdicao.cliente}"
+								converter="clienteConverter" required="true">
+								<f:selectItem itemLabel="" noSelectionOption="true" />
+								<f:selectItems value="#{pedidoController.clientes}"
+									var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" />
+							</p:selectOneMenu>
 							
+							<p:outputLabel />
+							<p:outputLabel />
+							
+							<p:outputLabel value="Produto" for="produto" />
+							<p:selectOneMenu id="produto" value="#{pedidoController.produtoSelecionado}"
+								converter="produtoConverter" style="width: 100%;">
+								<f:selectItem itemLabel="" noSelectionOption="true" />
+								<f:selectItems value="#{pedidoController.produtos}"
+									var="produto" itemLabel="#{produto.codigo} - #{produto.descricao}" itemValue="#{produto}" />
+								
+							</p:selectOneMenu>
+							
+							<p:commandButton id="btnAdicionar" style="max-width: 50px;"
+								actionListener="#{pedidoController.addItemPedido}"
+								process="produto @this" update="dtItensPedido"
+								icon="fa fa-fw fa-plus" />
+							
+							<p:outputLabel />
 						</p:panelGrid>
+						
+						<p:fieldset legend="Itens do pedido">
+							<p:dataTable id="dtItensPedido"
+								value="#{pedidoController.pedidoEdicao.itens}" reflow="true"
+								var="item">
+								<p:column headerText="Produto">
+									<h:outputText value="#{item.produto.codigo} - #{item.produto.descricao}" />
+								</p:column>
+								<p:column headerText="Valor Unitário">
+									<h:outputText value="R$ #{item.valorUnitario}" />
+								</p:column>
+								<p:column headerText="Qtd Item">
+									<p:spinner value="#{item.quantidadeItens}">
+										<p:ajax update="dtItensPedido" process="@this" listener="#{pedidoController.calcularValorTotal}" />
+									</p:spinner>
+								</p:column>
+								
+								<f:facet name="footer">
+									<h:outputText value="Valor Total: R$ #{pedidoController.pedidoEdicao.valorTotal}" />
+								</f:facet>
+							</p:dataTable>
+						</p:fieldset>
 					</p:tab>
 				</p:tabView>
 			</div>

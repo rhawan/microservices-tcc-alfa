@@ -2,20 +2,21 @@ package br.alfa.sales.vo;
 
 import java.math.BigDecimal;
 
-public class ItemPedidoVO {
+public class ItemPedidoVOTela {
 	
-	private Long produtoId;
+	private ProdutoVO produto;
 	
 	private BigDecimal valorUnitario;
 	
 	private Integer quantidadeItens;
 	
-	public Long getProdutoId() {
-		return produtoId;
+
+	public ProdutoVO getProduto() {
+		return produto;
 	}
 
-	public void setProdutoId(Long produtoId) {
-		this.produtoId = produtoId;
+	public void setProduto(ProdutoVO produto) {
+		this.produto = produto;
 	}
 
 	public BigDecimal getValorUnitario() {
@@ -34,5 +35,4 @@ public class ItemPedidoVO {
 		this.quantidadeItens = quantidade;
 	}
 	
-
 }

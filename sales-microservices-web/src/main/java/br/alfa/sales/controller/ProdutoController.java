@@ -38,18 +38,33 @@ public class ProdutoController implements Serializable {
 	}
 	
 	public void salvar() {
-		produtoService.salvarProduto(produtoEdicao);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto salvo com sucesso!"));
+		try {
+			produtoService.salvarProduto(produtoEdicao);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto salvo com sucesso!"));
+			this.limparTela();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao salvar produto!\n" + e.getMessage(), null));
+		}
 	}
 	
 	public void excluirProduto() {
-		produtoService.excluirProduto(produtoEdicao);
-		pesquisarProdutos();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto excluído com sucesso!"));
+		try {
+			produtoService.excluirProduto(produtoEdicao);
+			pesquisarProdutos();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto excluído com sucesso!"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excluir produto!\n" + e.getMessage(), null));
+		}
 	}
 	
-	private void pesquisarProdutos() {
+	public void pesquisarProdutos() {
 		this.produtos = produtoService.listarProdutos();
+	}
+	
+	private void limparTela() {
+		this.produtoEdicao = new ProdutoVO();
 	}
 
 	public ProdutoVO getProdutoEdicao() {

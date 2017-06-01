@@ -3,9 +3,6 @@ package br.alfa.sales.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -19,10 +16,6 @@ public class ItemPedido extends Entidade {
 	
 	private Integer quantidadeItens;
 	
-	@ManyToOne
-	@JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name = "fk_pedido_id"))
-	private Pedido pedido;
-
 	public Long getProdutoId() {
 		return produtoId;
 	}
@@ -39,11 +32,11 @@ public class ItemPedido extends Entidade {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public Integer getQuantidade() {
+	public Integer getQuantidadeItens() {
 		return quantidadeItens;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidadeItens(Integer quantidade) {
 		this.quantidadeItens = quantidade;
 	}
 

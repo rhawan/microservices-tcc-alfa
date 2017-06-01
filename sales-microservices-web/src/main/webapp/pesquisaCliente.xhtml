@@ -11,13 +11,17 @@
 			<h:form id="frm">
 			
 				<p:toolbar>
+					<p:toolbarGroup align="left">
+						<p:commandButton value="Atualizar" action="#{clienteController.pesquisarClientes}"
+							update="dtClientes" />
+					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
 						<p:commandButton value="Novo cliente" action="#{clienteController.novoCliente}"
 							process="@this" />
 					</p:toolbarGroup>
 				</p:toolbar>
 				
-				<p:growl autoUpdate="false" />
+				<p:growl autoUpdate="true" />
 			
 				<p:dataTable id="dtClientes" value="#{clienteController.clientes}" var="cliente"
 						selectionMode="single" selection="#{clienteController.clienteEdicao}"
